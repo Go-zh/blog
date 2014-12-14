@@ -1,5 +1,5 @@
-application: golang-org
-version: blog-test
+application: zh-golang
+version: blog
 runtime: go
 api_version: go1
 

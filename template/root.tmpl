@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>{{template "title" .}}</title>
 	<link type="text/css" rel="stylesheet" href="/lib/godoc/style.css">
-	<link rel="alternate" type="application/atom+xml" title="blog.golang.org - Atom Feed" href="//blog.golang.org/feed.atom" />
+	<link rel="alternate" type="application/atom+xml" title="blog.golang.org - Atom Feed" href="//blog.zh-golang.appspot.com/feed.atom" />
 	<script type="text/javascript">window.initFuncs = [];</script>
 	<style>
 		#sidebar {
@@ -52,14 +52,14 @@
 
 <form method="GET" action="{{.GodocURL}}/search">
 <div id="menu">
-<a href="{{.GodocURL}}/doc/">Documents</a>
-<a href="{{.GodocURL}}/pkg/">Packages</a>
-<a href="{{.GodocURL}}/project/">The Project</a>
-<a href="{{.GodocURL}}/help/">Help</a>
-<a href="{{.BasePath}}/">Blog</a>
+<a href="{{.GodocURL}}/doc/">文档</a>
+<a href="{{.GodocURL}}/pkg/">包</a>
+<a href="{{.GodocURL}}/project/">关于本项目</a>
+<a href="{{.GodocURL}}/help/">帮助</a>
+<a href="{{.BasePath}}/">博客</a>
 <input type="text" id="search" name="q" class="inactive" value="Search" placeholder="Search">
 </div>
-<div id="heading"><a href="{{.GodocURL}}/">The Go Programming Language</a></div>
+<div id="heading"><a href="{{.GodocURL}}/">Go 编程语言</a></div>
 </form>
 
 </div></div>
@@ -155,10 +155,10 @@ $(function() {
 {{define "doc"}}
 	<div class="article">
 		<h3 class="title"><a href="{{.Path}}">{{.Title}}</a></h3>
-		<p class="date">{{.Time.Format "2 January 2006"}}</p>
+		<p class="date">{{.Time.Format "2006/01/02"}}</p>
 		{{.HTML}}
 		{{with .Authors}}
-			<p class="author">By {{authors .}}</p>
+			<p class="author">{{authors .}} 编写</p>
 		{{end}}
 	</div>
 {{end}}

@@ -1,9 +1,11 @@
+// +build OMIT
+
 // Package tomb provides a Context implementation that is canceled when either
 // its parent Context is canceled or a provided Tomb is killed.
 package tomb
 
 import (
-	"code.google.com/p/go.net/context"
+	"golang.org/x/net/context"
 	tomb "gopkg.in/tomb.v2"
 )
 

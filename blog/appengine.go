@@ -11,7 +11,7 @@ package main
 import (
 	"net/http"
 
-	"golang.org/x/tools/blog"
+	"github.com/blog/tools/blog"
 )
 
 func init() {

@@ -13,7 +13,7 @@ import (
 	"log"
 	"net/http"
 
-	"golang.org/x/tools/blog"
+	"github.com/blog/tools/blog"
 )
 
 var (

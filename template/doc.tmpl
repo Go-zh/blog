@@ -79,7 +79,7 @@
   <iframe src="{{.URL}}"{{with .Height}} height="{{.}}"{{end}}{{with .Width}} width="{{.}}"{{end}} frameborder="0" allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>
 </div>
 {{end}}
-      
+
 {{define "link"}}<p class="link"><a href="{{.URL}}" target="_blank">{{style .Label}}</a></p>{{end}}
 
 {{define "html"}}{{.HTML}}{{end}}

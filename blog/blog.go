@@ -22,11 +22,11 @@ const hostname = "blog.golang.org" // default hostname for blog server
 var config = blog.Config{
 	Hostname:     hostname,
 	BaseURL:      "//" + hostname,
-	GodocURL:     "//golang.org",
+	GodocURL:     "https://go-zh.org",
 	HomeArticles: 5,  // articles to display on the home page
 	FeedArticles: 10, // articles to include in Atom and JSON feeds
 	PlayEnabled:  true,
-	FeedTitle:    "The Go Programming Language Blog",
+	FeedTitle:    "Go 语言博客",
 }
 
 func init() {

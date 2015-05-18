@@ -70,17 +70,17 @@
 <div id="sidebar">
 	{{with .Doc}}
 		{{with .Newer}}
-			<h4>Next article</h4>
+			<h4>下一篇</h4>
 			<p><a href="{{.Path}}">{{.Title}}</a></p>
 		{{end}}
 		
 		{{with .Older}}
-			<h4>Previous article</h4>
+			<h4>上一篇</h4>
 			<p><a href="{{.Path}}">{{.Title}}</a></p>
 		{{end}}
 	{{end}}
 	
-	<h4>Links</h4>
+	<h4>链接</h4>
 	<ul>
 	<li><a href='//golang.org/'>golang.org</a></li>
 	<li><a href='//go-zh.org/'>golang.org 中文版</a></li>

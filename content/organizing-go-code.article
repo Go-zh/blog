@@ -1,53 +1,126 @@
-Organizing Go code
+组织 Go 代码
+# Organizing Go code
 16 Aug 2012
 Tags: godoc, gopath, interface, libraries, tools, technical
 
 Andrew Gerrand
+Go-zh 项目组译
 
-* Introduction
+# * Introduction
 
-Go code is organized differently to that of other languages. This post discusses how to name and package the elements of your Go program to best serve its users.
+* 引言
 
-* Choose good names
+# Go code is organized differently to that of other languages. This post discusses how to name and package the elements of your Go program to best serve its users.
 
-The names you choose affect how you think about your code, so take care when naming your package and its exported identifiers.
+Go 代码的组织不同于其它语言。本文讨论了 Go 程序的元素如何命名与分包，使其以最佳状态服务用户。
 
-A package's name provides context for its contents. For instance, the [[http://golang.org/pkg/bytes/][bytes package]] from the standard library exports the `Buffer` type. On its own, the name `Buffer` isn't very descriptive, but when combined with its package name its meaning becomes clear: `bytes.Buffer`. If the package had a less descriptive name, like `util`, the buffer would likely acquire the longer and clumsier name `util.BytesBuffer`. 
+# * Choose good names
+
+* 选择好名字
+
+# The names you choose affect how you think about your code, so take care when naming your package and its exported identifiers.
+
+名字的选择会影响你对自己代码的思考，所以在给包和已导出标志符命名时，请认真考虑。
+
+# A package's name provides context for its contents. For instance, the [[http://golang.org/pkg/bytes/][bytes package]] from the standard library exports the `Buffer` type. On its own, the name `Buffer` isn't very descriptive, but when combined with its package name its meaning becomes clear: `bytes.Buffer`. If the package had a less descriptive name, like `util`, the buffer would likely acquire the longer and clumsier name `util.BytesBuffer`. 
+
+包名能提供其内容的上下文。例如，标准库中的
+[[http://golang.org/pkg/bytes/][bytes 包]]导出了 `Buffer` 类型。虽然其自身的名字
+`Buffer` 描述性不足，不过将它和包名连缀起来就意义自明了： `bytes.Buffer` 。
+如果该包的名字像 `util` 那样没什么描述性，那缓冲区的名字可能就得成
+`util.BytesBuffer` 那样又笨又长了。
 
 Don't be shy about renaming things as you work. As you spend time with your program you will better understand how its pieces fit together and, therefore, what their names should be. There's no need to lock yourself into early decisions. (The [[http://golang.org/cmd/gofmt/][gofmt command]] has a `-r` flag that provides a syntax-aware search and replace, making large-scale refactoring easier.)
 
+不要羞于在折腾时重命名。你如果在自己的程序上多花点时间，就能更好地理解部分之间如何契合工作，
+这样，它们的名字自然就浮出水面了。没必要把自己束缚在早期的决定上。
+（[[http://go-zh.org/cmd/gofmt/][gofmt 命令]]有个 `-r`
+标记提供了基于语法侦测的搜索和替换，它能让高灵活性的重构更加容易。
+译注：官方 tools 中还有一组更强大的[[https://godoc.org/golang.org/x/tools/refactor/][refactor 重构工具]]。）
+
 A good name is the most important part of a software interface: the name is the first thing every client of the code will see. A well-chosen name is therefore the starting point for good documentation. Many of the following practices result organically from good naming. 
+
+良好的名字是软件接口中最重要的部分：每个代码的使用者都会最先看到名字。
+精挑细选的名字也是最佳文档的起点。下面这些实践结果源自良好命名的有机结合。
 
 * Choose a good import path (make your package "go get"-able)
 
+* 选择一个好的导入路径（让你的包 “go get” 得了）
+
 An import path is the string with which users import a package. It specifies the directory (relative to `$GOROOT/src/pkg` or `$GOPATH/src`) in which the package's source code resides.
+
+导入路径是一个字符串，用户可以用它来导入包。它指定了包源码所在的目录（相对于
+`$GOROOT/src/pkg` 或 `$GOPATH/src`)。
 
 Import paths should be globally unique, so use the path of your source repository as its base. For instance, the `websocket` package from the `go.net` sub-repository has an import path of `"golang.org/x/net/websocket"`. The Go project owns the path `"code.google.com/p/go"`, so that path cannot be used by another author for a different package. Because the repository URL and import path are one and the same, the `go`get` command can fetch and install the package automatically.
 
+导入路径应当全局唯一，因此要使用你的源码库路径作为基础。例如 `go.net`
+子源码库中 `websocket` 包的导入路径为`"golang.org/x/net/websocket"` 。
+
 If you don't use a hosted source repository, choose some unique prefix such as a domain, company, or project name. As an example, the import path of all Google's internal Go code starts with the string `"google"`.
+
+若你并未使用源码库托管，请选择一些唯一的前缀，如域名、公司或项目名等。举例来说，所有
+Google 的内部 Go 代码都以字符串 `"google"` 开头。
 
 The last element of the import path is typically the same as the package name. For instance, the import path `"net/http"` contains package `http`. This is not a requirement - you can make them different if you like - but you should follow the convention for predictability's sake: a user might be surprised that import `"foo/bar"` introduces the identifier `quux` into the package name space.
 
+导入路径的最后一个元素一般与包名相同。例如，导入路径  `"net/http"` 包含 `http`
+包。这并非必须的——如果你喜欢，可以让它不同——不过你应当遵循约定可预见性的缘由：
+用户可能会惊讶于导入 `"foo/bar"` 时将标识符 `quux` 引入该包的名字空间。
+
 Sometimes people set `GOPATH` to the root of their source repository and put their packages in directories relative to the repository root, such as `"src/my/package"`. On one hand, this keeps the import paths short (`"my/package"` instead of `"github.com/me/project/my/package"`), but on the other it breaks `go`get` and forces users to re-set their `GOPATH` to use the package. Don't do this.
+
+某些人将 `GOPATH` 设置为源码库的根目录，并将目录中的包放到源码库根目录的相对路径中，例如 `"src/my/package"` 。虽说这能让导入路径更加简短（ `"my/package"` 而非 `"github.com/me/project/my/package"` ），但也会破坏 `go`get` 的可用性并迫使用户重新设置他们的 `GOPATH` 来使用该包。总之别这么干。
 
 * Minimize the exported interface
 
+* 最小化已导出接口
+
 Your code is likely composed of many small pieces of useful code, and so it is tempting to expose much of that functionality in your package's exported interface. Resist that urge!
+
+你的代码很可能是由许多有用的代码片段构成的，所以很容易诱使你在包的已导出接口中暴露出太多功能。请克制这种冲动！
 
 The larger the interface you provide, the more you must support. Users will quickly come to depend on every type, function, variable, and constant you export, creating an implicit contract that you must honor in perpetuity or risk breaking your users' programs. In preparing Go 1 we carefully reviewed the standard library's exported interfaces and removed the parts we weren't ready to commit to. You should take similar care when distributing your own libraries.
 
+你提供的接口越大，所需提供的支持就越多。用户会很快开始依赖你所导出的每个类型、函数、变量和常量，创建一个隐式的契约使你必须永久承诺，否者需要冒着破坏掉你的用户的程序的风险。在制订 Go 1 时，我们认真地审阅了标准库的已导出接口，并移除了我们不打算提交的部分。在发行自己的库时，也应当同样小心对待。
+
 If in doubt, leave it out!
+
+若有疑问，扔那便是！
 
 * What to put into a package
 
+* 包里放啥？
+
 It is easy to just throw everything into a "grab bag" package, but this dilutes the meaning of the package name (as it must encompass a lot of functionality) and forces the users of small parts of the package to compile and link a lot of unrelated code.
+
+把啥都扔到一个“杂物袋”包里很容易，但这会淡化包名的意义（因为它必须包含很多功能），
+也会强制只使用其中一小部分的用户编译并连接大量无关代码。
 
 On the other hand, it is also easy to go overboard in splitting your code into small packages, in which case you will likely becomes bogged down in interface design, rather than just getting the job done.
 
+另一方面，将代码过分细分成小包也很容易。这时，你大概会陷入接口设计中不能自拔，而不再是完成工作。
+
 Look to the Go standard libraries as a guide. Some of its packages are large and some are small. For instance, the [[http://golang.org/pkg/net/http/][http package]] comprises 17 go source files (excluding tests) and exports 109 identifiers, and the [[http://golang.org/pkg/hash/][hash package]] consists of one file that exports just three declarations. There is no hard and fast rule; both approaches are appropriate given their context.
+
+可以将 Go 标准库作为指导。其中某些包异常庞大，而有些则十分小巧。例如，
+[[http://golang.org/pkg/net/http/][http 包]] 囊括了 17 个 go 源码文件（测试除外），
+导出了 109 个标识符；而 [[http://golang.org/pkg/hash/][hash 包]]则只导出了
+3 个声明，仅 1 个文件构成。
 
 With that said, package main is often larger than other packages. Complex commands contain a lot of code that is of little use outside the context of the executable, and often it's simpler to just keep it all in the one place. Godoc is nearly 6000 lines over [[http://golang.org/src/cmd/godoc/][16 files]], and the go tool is more than 7000 lines spread across [[http://golang.org/src/cmd/go/][23 files]].
 
+如此说来，main 包往往比其它包更大。复杂命令包含的大量代码很少在可执行文件的上下文之外使用，
+把它们放在一起往往更加简单。Godoc 的 [[http://golang.org/src/cmd/godoc/][16 个文件内]
+包含着近 6000 行的代码，而 go 工具超过 7000 行代码则分散在
+[[http://golang.org/src/cmd/go/][23 个文件中]]。
+
 * Document your code
 
+* 为你的代码编写文档
+
 Good documentation is an essential quality of usable and maintainable code. Read the [[http://golang.org/doc/articles/godoc_documenting_go_code.html][Godoc: documenting Go code]] article to learn how to write good doc comments.
+
+拥有良好的文档是让代码易于使用，便于维护的基本要求。请阅读
+[[http://golang.org/doc/articles/godoc_documenting_go_code.html][Godoc：编写 Go 代码文档]]
+来学习如何编写良好的文档注释。

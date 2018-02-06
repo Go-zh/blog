@@ -51,11 +51,12 @@ An import path is the string with which users import a package. It specifies the
 导入路径是一个字符串，用户可以用它来导入包。它指定了包源码所在的目录（相对于
 `$GOROOT/src/pkg` 或 `$GOPATH/src`)。
 
-Import paths should be globally unique, so use the path of your source repository as its base. For instance, the `websocket` package from the `go.net` sub-repository has an import path of `"golang.org/x/net/websocket"`. The Go project owns the path `"code.google.com/p/go"`, so that path cannot be used by another author for a different package. Because the repository URL and import path are one and the same, the `go`get` command can fetch and install the package automatically.
+Import paths should be globally unique, so use the path of your source repository as its base. For instance, the `websocket` package from the `go.net` sub-repository has an import path of `"golang.org/x/net/websocket"`. The Go project owns the path `"github.com/golang"`, so that path cannot be used by another author for a different package. Because the repository URL and import path are one and the same, the `go`get` command can fetch and install the package automatically.
 
 导入路径应当全局唯一，因此要使用你的源码库路径作为基础。例如 `go.net`
 子源码库中 `websocket` 包的导入路径为`"golang.org/x/net/websocket"` 。
-由于 Go 项目拥有 `golang.org/x` 路径，使用它作为包导入路径的前缀保证了导入路径的唯一性。
+由于 Go 项目拥有 `"github.com/golang"` 路径，使用它作为包导入路径的前缀保证了导入路径的唯一性。
+由于源码库的 URL 和导入路径是同一个，因此 `go`get` 命令可以自动获取并安装包。
 
 If you don't use a hosted source repository, choose some unique prefix such as a domain, company, or project name. As an example, the import path of all Google's internal Go code starts with the string `"google"`.
 

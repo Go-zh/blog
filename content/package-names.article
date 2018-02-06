@@ -202,9 +202,10 @@ Go 代码通过包来组织。在包内部，代码可以引用包中定义的�
 按照约定，包路径的最后一个元素即为包名：
 
 	import (
-		"fmt"                       // package fmt
-		"os/exec"                   // package exec
-		"golang.org/x/net/context"  // package context
+		"context"                // package context
+		"fmt"                    // package fmt
+		"golang.org/x/time/rate" // package rate
+		"os/exec"                // package exec
 	)
 
 # Build tools map package paths onto directories.
@@ -235,7 +236,7 @@ Go 代码通过包来组织。在包内部，代码可以引用包中定义的�
 # packages in different directories can have the same name.
 # For example,
 # [[https://golang.org/pkg/runtime/pprof][runtime/pprof]] provides profiling data
-# in the format expected by the [[https://code.google.com/p/gperftools][pprof]]
+# in the format expected by the [[https://github.com/google/pprof][pprof]]
 # profiling tool, while [[https://golang.org/pkg/net/http/pprof][net/http/pprof]]
 # provides HTTP endpoints to present profiling data in this format.
 # Client code uses the package path to import the package, so there is no
@@ -247,7 +248,7 @@ Go 代码通过包来组织。在包内部，代码可以引用包中定义的�
 
 就像不同包中的类型可以同名而不会引起混淆，不同目录中的包也可以同名。
 例如，[[https://go-zh.org/pkg/runtime/pprof][runtime/pprof]] 提供了
-[[https://code.google.com/p/gperftools][pprof]] 剖析工具所需格式的剖析数据，
+[[https://github.com/google/pprof][pprof]] 剖析工具所需格式的剖析数据，
 而 [[https://go-zh.org/pkg/net/http/pprof][net/http/pprof]]
 则提供了按这种格式展示剖析数据的HTTP端点。用户代码通过包路径导入该包，因此不会混淆。
 若源文件需要导入两个 `pprof` 包，那么可以局部地将其中之一或二者都

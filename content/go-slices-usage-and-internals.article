@@ -301,7 +301,7 @@ Go的数组是值语义。一个数组变量表示整个数组，它不是指向
 中向它追加数据：
 
 	// Filter returns a new slice holding only
-	// the elements of s that satisfy f()
+	// the elements of s that satisfy fn()
 	func Filter(s []int, fn func(int) bool) []int {
 	    var p []int // == nil
 	    for _, v := range s {

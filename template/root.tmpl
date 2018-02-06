@@ -9,7 +9,8 @@
 	<meta name="theme-color" content="#375EAB">
 	<title>{{template "title" .}}</title>
 	<link type="text/css" rel="stylesheet" href="/lib/godoc/style.css">
-	<link rel="alternate" type="application/atom+xml" title="blog.go-zh.org - Atom Feed" href="//blog.go-zh.org/feed.atom" />
+	<link type="text/css" rel="stylesheet" href="/fonts.css">
+	<link rel="alternate" type="application/atom+xml" title="blog.go-zh.org - Atom Feed" href="https://blog.go-zh.org/feed.atom" />
 	<script type="text/javascript">window.initFuncs = [];</script>
 	<style>
 		#sidebar {
@@ -48,6 +49,13 @@
 		#content img {
 			max-width: 100%;
 		}
+		.article[data-slug='/go-fonts'] {
+			font-family: Go, sans-serif;
+		}
+		.article[data-slug='/go-fonts'] pre,
+		.article[data-slug='/go-fonts'] code {
+			font-family: Go Mono, monospace;
+		}
 	</style>
 </head>
 <body>
@@ -64,7 +72,7 @@
 <a href="{{.GodocURL}}/project/">项目</a>
 <a href="{{.GodocURL}}/help/">帮助</a>
 <a href="{{.BasePath}}/">博客</a>
-<input type="text" id="search" name="q" class="inactive" value="搜索" placeholder="搜索">
+<span class="search-box"><input type="search" id="search" name="q" placeholder="搜索" aria-label="搜索" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
 </div>
 </form>
 
@@ -79,13 +87,13 @@
 			<h4>下一篇</h4>
 			<p><a href="{{.Path}}">{{.Title}}</a></p>
 		{{end}}
-		
+
 		{{with .Older}}
 			<h4>上一篇</h4>
 			<p><a href="{{.Path}}">{{.Title}}</a></p>
 		{{end}}
 	{{end}}
-	
+
 	<h4>链接</h4>
 	<ul>
 	<li><a href='//golang.org/'>golang.org</a></li>
@@ -95,11 +103,11 @@
 	<li><a href='//go-zh.org/doc/'>Go 文档</a></li>
 	<li><a href='//groups.google.com/group/golang-nuts'>Go 邮件列表（英文）</a></li>
 	<li><a href='//groups.google.com/group/golang-china'>Go 邮件列表（中文）</a></li>
-	<li><a href='//plus.google.com/101406623878176903605'>Go on Google+</a></li>
+	<li><a href='//plus.google.com/101406623878176903605'>Go 在 Google+</a></li>
 	<li><a href='//plus.google.com/112164155169467723645/posts'>Go+ 社区</a></li>
-	<li><a href='//twitter.com/golang'>Go on Twitter</a></li>
+	<li><a href='//twitter.com/golang'>Go 在 Twitter</a></li>
 	</ul>
-	
+
 	<p><a href="{{.BasePath}}/index">博客索引</a></p>
 </div><!-- #sidebar -->
 
@@ -112,8 +120,9 @@
 	<p>
 	除<a href="https://developers.google.com/site-policies#restrictions">特别注明</a>外，
 	本页内容均采用知识共享-署名（CC-BY）3.0 协议授权，代码采用<a href="//go-zh.org/LICENSE">BSD协议</a>授权。<br>
-	<a href="//go-zh.org/doc/tos.html">服务条款</a> | 
-	<a href="http://www.google.com/intl/en/policies/privacy/">隐私政策</a>
+	<a href="//go-zh.org/doc/tos.html">服务条款</a> |
+	<a href="//www.google.com/intl/en/policies/privacy/">隐私政策</a> |
+	<a href="https://go.googlesource.com/blog/">查看源码</a>
 	</p>
 </div><!-- #footer -->
 
@@ -158,7 +167,7 @@ $(function() {
 {{end}}
 
 {{define "doc"}}
-	<div class="article">
+	<div class="article" data-slug="{{.Path}}">
 		<h3 class="title"><a href="{{.Path}}">{{.Title}}</a></h3>
 		<p class="date">{{.Time.Format "2006/01/02"}}</p>
 		{{.HTML}}

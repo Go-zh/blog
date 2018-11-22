@@ -153,7 +153,7 @@ the first and last elements of our slice:
 You'll often hear experienced Go programmers talk about the "slice header"
 because that really is what's stored in a slice variable.
 For instance, when you call a function that takes a slice as an argument, such as
-[[http://golang.org/pkg/bytes/#IndexRune][bytes.IndexRune]], that header is
+[[https://golang.org/pkg/bytes/#IndexRune][bytes.IndexRune]], that header is
 what gets passed to the function.
 In this call,
 
@@ -422,7 +422,7 @@ Try it:
 
 .play -edit slices/prog120.go /START/,/END/
 
-Another new technique is in this example is that we initialize the slice by writing a composite literal,
+Another new technique in this example is that we initialize the slice by writing a composite literal,
 which consists of the type of the slice followed by its elements in braces:
 
 .code slices/prog120.go /slice := /
@@ -549,7 +549,7 @@ were added to the language, they provided a model for efficient string handling.
 the benchmarks saw huge speedups as a result.
 
 There's much more to strings, of course, and a
-[[http://blog.golang.org/strings][separate blog post]] covers them in greater depth.
+[[https://blog.golang.org/strings][separate blog post]] covers them in greater depth.
 
 * Conclusion
 
@@ -569,9 +569,9 @@ There's lots to find around the intertubes about slices in Go.
 As mentioned earlier,
 the [[https://golang.org/wiki/SliceTricks]["Slice Tricks" Wiki page]]
 has many examples.
-The [[http://blog.golang.org/go-slices-usage-and-internals][Go Slices]] blog post
+The [[https://blog.golang.org/go-slices-usage-and-internals][Go Slices]] blog post
 describes the memory layout details with clear diagrams.
-Russ Cox's [[http://research.swtch.com/godata][Go Data Structures]] article includes
+Russ Cox's [[https://research.swtch.com/godata][Go Data Structures]] article includes
 a discussion of slices along with some of Go's other internal data structures.
 
 There is much more material available, but the best way to learn about slices is to use them.

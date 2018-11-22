@@ -183,7 +183,7 @@ Go的数组是值语义。一个数组变量表示整个数组，它不是指向
 这使得切片操作和数组索引一样高效。因此，通过一个新切片修改元素会影响到原始切片的对应元素。
 
 	d := []byte{'r', 'o', 'a', 'd'}
-	e := d[2:] 
+	e := d[2:]
 	// e == []byte{'a', 'd'}
 	e[1] = 'm'
 	// e == []byte{'a', 'm'}
@@ -275,7 +275,7 @@ Go的数组是值语义。一个数组变量表示整个数组，它不是指向
 但大多数程序不需要完全的控制，因此Go提供了一个内置函数 `append` ，
 用于大多数场合；它的函数签名：
 
-	func append(s []T, x ...T) []T 
+	func append(s []T, x ...T) []T
 
 # The `append` function appends the elements `x` to the end of the slice `s`, and grows the slice if a greater capacity is needed.
 
@@ -357,15 +357,15 @@ Go的数组是值语义。一个数组变量表示整个数组，它不是指向
 
 * 延伸阅读
 
-# [[http://golang.org/doc/effective_go.html][Effective Go]] contains an in-depth treatment of [[http://golang.org/doc/effective_go.html#slices][slices]] and [[http://golang.org/doc/effective_go.html#arrays][arrays]], and the Go [[http://golang.org/doc/go_spec.html][language specification]] defines [[http://golang.org/doc/go_spec.html#Slice_types][slices]] and their [[http://golang.org/doc/go_spec.html#Length_and_capacity][associated]] [[http://golang.org/doc/go_spec.html#Making_slices_maps_and_channels][helper]] [[http://golang.org/doc/go_spec.html#Appending_and_copying_slices][functions]].
+# [[https://golang.org/doc/effective_go.html][Effective Go]] contains an in-depth treatment of 在[[https://golang.org/doc/effective_go.html#slices][slices]] and [[https://golang.org/doc/effective_go.html#arrays][arrays]], and the Go [[https://golang.org/doc/go_spec.html][language specification]] defines [[https://golang.org/doc/go_spec.html#Slice_types][slices]] and their [[https://golang.org/doc/go_spec.html#Length_and_capacity][associated]] [[https://golang.org/doc/go_spec.html#Making_slices_maps_and_channels][helper]] [[https://golang.org/doc/go_spec.html#Appending_and_copying_slices][functions]].
 
 [[https://go-zh.org/doc/effective_go.html][实效 Go 编程]] 包含了对
-[[https://go-zh.org/doc/effective_go.html#切片][切片]]和
-[[https://go-zh.org/doc/effective_go.html#数组][数组]]更深入的探讨；
-[[https://go-zh.org/ref/spec][Go 编程语言规范]]对
-[[https://go-zh.org/ref/spec#Slice_types][切片类型]]和
+[[https://go-zh.org/doc/effective_go.html#切片][切片]] 和
+[[https://go-zh.org/doc/effective_go.html#数组][数组]] 更深入的探讨；
+[[https://go-zh.org/ref/spec][Go 编程语言规范]] 对
+[[https://go-zh.org/ref/spec#Slice_types][切片类型]] 和
 [[https://go-zh.org/ref/spec#Array_types][数组类型]]
-以及操作他们的内建函数（[[https://go-zh.org/ref/spec#Length_and_capacity][len/cap]]，
-[[https://go-zh.org/ref/spec#Making_slices_maps_and_channels][make]]和
-[[https://go-zh.org/ref/spec#Appending_and_copying_slices][copy/append]]）
+以及与它们 [[https://go-zh.org/ref/spec#Length_and_capacity][相关的]]
+[[https://go-zh.org/ref/spec#Making_slices_maps_and_channels][辅助]]
+[[https://go-zh.org/ref/spec#Appending_and_copying_slices][函数]]
 进行了定义。

@@ -21,7 +21,7 @@ Go 代码的组织不同于其它语言。本文讨论了 Go 程序的元素如�
 
 名字的选择会影响你对自己代码的思考，所以在给包和已导出标志符命名时，请认真考虑。
 
-# A package's name provides context for its contents. For instance, the [[http://golang.org/pkg/bytes/][bytes package]] from the standard library exports the `Buffer` type. On its own, the name `Buffer` isn't very descriptive, but when combined with its package name its meaning becomes clear: `bytes.Buffer`. If the package had a less descriptive name, like `util`, the buffer would likely acquire the longer and clumsier name `util.BytesBuffer`.
+# A package's name provides context for its contents. For instance, the [[https://golang.org/pkg/bytes/][bytes package]] from the standard library exports the `Buffer` type. On its own, the name `Buffer` isn't very descriptive, but when combined with its package name its meaning becomes clear: `bytes.Buffer`. If the package had a less descriptive name, like `util`, the buffer would likely acquire the longer and clumsier name `util.BytesBuffer`.
 
 包名能提供其内容的上下文。例如，标准库中的
 [[http://golang.org/pkg/bytes/][bytes 包]]导出了 `Buffer` 类型。虽然其自身的名字
@@ -29,7 +29,7 @@ Go 代码的组织不同于其它语言。本文讨论了 Go 程序的元素如�
 如果该包的名字像 `util` 那样没什么描述性，那缓冲区的名字可能就得成
 `util.BytesBuffer` 那样又笨又长了。
 
-Don't be shy about renaming things as you work. As you spend time with your program you will better understand how its pieces fit together and, therefore, what their names should be. There's no need to lock yourself into early decisions. (The [[http://golang.org/cmd/gofmt/][gofmt command]] has a `-r` flag that provides a syntax-aware search and replace, making large-scale refactoring easier.)
+Don't be shy about renaming things as you work. As you spend time with your program you will better understand how its pieces fit together and, therefore, what their names should be. There's no need to lock yourself into early decisions. (The [[https://golang.org/cmd/gofmt/][gofmt command]] has a `-r` flag that provides a syntax-aware search and replace, making large-scale refactoring easier.)
 
 不要羞于在折腾时重命名。你如果在自己的程序上多花点时间，就能更好地理解部分之间如何契合工作，
 这样，它们的名字自然就浮出水面了。没必要把自己束缚在早期的决定上。
@@ -102,14 +102,14 @@ On the other hand, it is also easy to go overboard in splitting your code into s
 
 另一方面，将代码过度细分成小包也很容易。这时，你大概会陷入接口设计中不能自拔，而不再专注于完成工作。
 
-Look to the Go standard libraries as a guide. Some of its packages are large and some are small. For instance, the [[http://golang.org/pkg/net/http/][http package]] comprises 17 go source files (excluding tests) and exports 109 identifiers, and the [[http://golang.org/pkg/hash/][hash package]] consists of one file that exports just three declarations. There is no hard and fast rule; both approaches are appropriate given their context.
+# Look to the Go standard libraries as a guide. Some of its packages are large and some are small. For instance, the [[https://golang.org/pkg/net/http/][http package]] comprises 17 go source files (excluding tests) and exports 109 identifiers, and the [[https://golang.org/pkg/hash/][hash package]] consists of one file that exports just three declarations. There is no hard and fast rule; both approaches are appropriate given their context.
 
 可以将 Go 标准库作为指导。其中某些包异常庞大，而有些则十分小巧。例如，
 [[http://go-zh.org/pkg/net/http/][http 包]] 囊括了 17 个 go 源码文件（测试除外），
 导出了 109 个标识符；而 [[http://golang.org/pkg/hash/][hash 包]]则只导出了
 3 个声明，仅由一个文件构成。
 
-With that said, package main is often larger than other packages. Complex commands contain a lot of code that is of little use outside the context of the executable, and often it's simpler to just keep it all in the one place. For instance, the go tool is more than 12000 lines spread across [[http://golang.org/src/cmd/go/][34 files]].
+# With that said, package main is often larger than other packages. Complex commands contain a lot of code that is of little use outside the context of the executable, and often it's simpler to just keep it all in the one place. For instance, the go tool is more than 12000 lines spread across [[https://golang.org/src/cmd/go/][34 files]].
 
 尽管如此，main 包往往比其它包更大。复杂命令包含的大量代码很少在可执行文件的上下文之外使用，
 把它们放在一起往往更加简单。Godoc 的 [[http://golang.org/src/cmd/godoc/][16 个文件内]
@@ -120,7 +120,7 @@ With that said, package main is often larger than other packages. Complex comman
 
 * 为你的代码编写文档
 
-Good documentation is an essential quality of usable and maintainable code. Read the [[http://golang.org/doc/articles/godoc_documenting_go_code.html][Godoc: documenting Go code]] article to learn how to write good doc comments.
+Good documentation is an essential quality of usable and maintainable code. Read the [[https://golang.org/doc/articles/godoc_documenting_go_code.html][Godoc: documenting Go code]] article to learn how to write good doc comments.
 
 拥有良好的文档是让代码易于使用，便于维护的基本要求。请阅读
 [[http://golang.org/doc/articles/godoc_documenting_go_code.html][Godoc：编写 Go 代码文档]]

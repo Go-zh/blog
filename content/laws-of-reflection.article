@@ -45,7 +45,7 @@ Go是静态类型的语言。每个变量都有一种静态类型。换言之，
 `MyInt` 。尽管变量 `i` 和 `j` 拥有相同的底层类型，
 但它们的静态类型仍然不同，因此它们在未经转换前是无法相互赋值的。
 
-# One important category of type is interface types, which represent fixed sets of methods. An interface variable can store any concrete (non-interface) value as long as that value implements the interface's methods. A well-known pair of examples is `io.Reader` and `io.Writer`, the types `Reader` and `Writer` from the [[http://golang.org/pkg/io/][io package]]:
+# One important category of type is interface types, which represent fixed sets of methods. An interface variable can store any concrete (non-interface) value as long as that value implements the interface's methods. A well-known pair of examples is `io.Reader` and `io.Writer`, the types `Reader` and `Writer` from the [[https://golang.org/pkg/io/][io package]]:
 
 有一类重要的类型称作接口类型，它表示一个确定的方法集。只要某个具体值
 （非接口）实现了某个接口中的方法，该接口类型的变量就能存储它。一个众所周知的例子就是
@@ -98,6 +98,11 @@ Go是静态类型的语言。每个变量都有一种静态类型。换言之，
 # We need to be precise about all this because reflection and interfaces are closely related.
 
 对于所有的这些，我们都必须严谨对待，因为反射和接口密切相关。
+
+# Russ Cox has written a [[https://research.swtch.com/2009/12/go-data-structures-interfaces.html][ detailed blog post]] about the representation of interface values in Go. It's not necessary to repeat the full story here, but a simplified summary is in order.
+
+Russ Cox 写过一篇关于 Go 中接口值的表示的[[https://research.swtch.com/2009/12/go-data-structures-interfaces.html][详细的博文]]。
+这里没必要再重复了，只给出简单的摘要。
 
 # * The representation of an interface
 
@@ -175,7 +180,7 @@ Russ Cox 写过一篇题为
 
 * 1. 从接口值可反射出反射对象。
 
-# At the basic level, reflection is just a mechanism to examine the type and value pair stored inside an interface variable. To get started, there are two types we need to know about in [[http://golang.org/pkg/reflect/][package reflect]]: [[http://golang.org/pkg/reflect/#Type][Type]] and [[http://golang.org/pkg/reflect/#Value][Value]]. Those two types give access to the contents of an interface variable, and two simple functions, called `reflect.TypeOf` and `reflect.ValueOf`, retrieve `reflect.Type` and `reflect.Value` pieces out of an interface value. (Also, from the `reflect.Value` it's easy to get to the `reflect.Type`, but let's keep the `Value` and `Type` concepts separate for now.)
+# At the basic level, reflection is just a mechanism to examine the type and value pair stored inside an interface variable. To get started, there are two types we need to know about in [[https://golang.org/pkg/reflect/][package reflect]]: [[https://golang.org/pkg/reflect/#Type][Type]] and [[https://golang.org/pkg/reflect/#Value][Value]]. Those two types give access to the contents of an interface variable, and two simple functions, called `reflect.TypeOf` and `reflect.ValueOf`, retrieve `reflect.Type` and `reflect.Value` pieces out of an interface value. (Also, from the `reflect.Value` it's easy to get to the `reflect.Type`, but let's keep the `Value` and `Type` concepts separate for now.)
 
 从基本层面上看，反射只是一种检查存储在接口变量中的“类型-值”对的机制。
 首先，我们需要了解 [[https://go-zh.org/pkg/reflect][reflect 包]]中的两种类型：
@@ -208,7 +213,7 @@ Russ Cox 写过一篇题为
 
 	type: float64
 
-# You might be wondering where the interface is here, since the program looks like it's passing the `float64` variable `x`, not an interface value, to `reflect.TypeOf`. But it's there; as [[http://golang.org/pkg/reflect/#TypeOf][godoc reports]], the signature of `reflect.TypeOf` includes an empty interface:
+# You might be wondering where the interface is here, since the program looks like it's passing the `float64` variable `x`, not an interface value, to `reflect.TypeOf`. But it's there; as [[https://golang.org/pkg/reflect/#TypeOf][godoc reports]], the signature of `reflect.TypeOf` includes an empty interface:
 
 你可能会问接口在哪，因为该程序看起来只是向 `reflect.TypeOf` 传递了一个
 `float64` 类型的变量 `x` ，而不是一个接口值。但它就在那，
@@ -528,7 +533,7 @@ The `String` method does not.)
 在使用反射修改结构体的字段时，这种情况经常出现。即，当我们有结构体的地址时，
 就能修改它的字段。
 
-# Here's a simple example that analyzes a struct value, `t`. We create the reflection object with the address of the struct because we'll want to modify it later. Then we set `typeOfT` to its type and iterate over the fields using straightforward method calls (see [[http://golang.org/pkg/reflect/][package reflect]] for details). Note that we extract the names of the fields from the struct type, but the fields themselves are regular `reflect.Value` objects.
+# Here's a simple example that analyzes a struct value, `t`. We create the reflection object with the address of the struct because we'll want to modify it later. Then we set `typeOfT` to its type and iterate over the fields using straightforward method calls (see [[https://golang.org/pkg/reflect/][package reflect]] for details). Note that we extract the names of the fields from the struct type, but the fields themselves are regular `reflect.Value` objects.
 
 下面这个简单的例子分析了结构体类型的值 `t` 。我们从它的地址创建了反射对象，
 因为待会儿要修改它。接着我们将 `typeOfT` 设置为它的类型，

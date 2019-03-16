@@ -17,7 +17,7 @@ import (
 	_ "github.com/Go-zh/tools/playground"
 )
 
-const hostname = "blog.golang.org" // default hostname for blog server
+const hostname = "blog.go-zh.org" // default hostname for blog server
 
 var config = blog.Config{
 	Hostname:     hostname,

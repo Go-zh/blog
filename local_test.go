@@ -12,7 +12,7 @@ import (
 	"strings"
 	"testing"
 
-	"golang.org/x/tools/blog"
+	"github.com/Go-zh/tools/blog"
 )
 
 func TestServer(t *testing.T) {

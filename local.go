@@ -29,7 +29,7 @@ var (
 )
 
 func defaultGodocPath() string {
-	out, err := exec.Command("go", "list", "-f", "{{.Dir}}", "golang.org/x/tools/godoc").CombinedOutput()
+	out, err := exec.Command("go", "list", "-f", "{{.Dir}}", "github.com/Go-zh/tools/godoc").CombinedOutput()
 	if err != nil {
 		log.Printf("warning: locating -godoc directory: %v", err)
 		return ""

@@ -4,8 +4,8 @@ This repository holds the Go Blog server code and content.
 
 ## Download/Install
 
-The easiest way to install is to run `go get -u golang.org/x/blog`. You can also
-manually git clone the repository to $GOPATH/src/golang.org/x/blog.
+The easiest way to install is to run `go get -u `. You can also
+manually git clone the repository to $GOPATH/src/.
 
 ## Running Locally
 
